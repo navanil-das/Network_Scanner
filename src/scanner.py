@@ -27,6 +27,18 @@ def scan_ports(target, ports):
 
     for result in results:
         if result:
+
             open_ports.append(result)
 
     return open_ports
+    
+def scan_udp_port(target, port):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock.settimeout(1)
+        sock.sendto(b"", (target, port))
+
+        sock.recvfrom(1024)
+        return port
+    except:
+        return None
