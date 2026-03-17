@@ -1,9 +1,16 @@
+import argparse
 from src.scanner import scan_ports
+from src.utils import parse_ports
 
 def main():
-    target = input("Enter target IP: ")
+    parser = argparse.ArgumentParser(description="Network Scanner")
+    parser.add_argument("--target", required=True, help="Target IP address")
+    parser.add_argument("--ports", default="1-1024", help="Port range (e.g. 1-1000)")
 
-    ports = range(1, 1025)
+    args = parser.parse_args()
+
+    target = args.target
+    ports = parse_ports(args.ports)
 
     print(f"\nScanning {target}...\n")
 
