@@ -25,3 +25,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+save_to_json(target, results)
+print("\nResults saved to results/scan_results.json")
