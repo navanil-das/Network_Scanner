@@ -27,3 +27,5 @@ if __name__ == "__main__":
     main()
 save_to_json(target, results)
 print("\nResults saved to results/scan_results.json")
+os_guess = detect_os(target)
+print(f"OS Guess: {os_guess}\n")
