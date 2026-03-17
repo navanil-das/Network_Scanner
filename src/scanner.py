@@ -1,5 +1,6 @@
 import socket
 from concurrent.futures import ThreadPoolExecutor
+from src.banner_grabber import grab_banner
 
 def scan_port(target, port):
     try:
@@ -9,7 +10,9 @@ def scan_port(target, port):
         sock.close()
 
         if result == 0:
-            return port
+            banner = grab_banner(target, port)
+            return (port, banner)
+
     except:
         pass
 
