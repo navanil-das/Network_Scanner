@@ -1,4 +1,5 @@
 import socket
+from concurrent.futures import ThreadPoolExecutor
 
 def scan_port(target, port):
     try:
@@ -18,8 +19,10 @@ def scan_port(target, port):
 def scan_ports(target, ports):
     open_ports = []
 
-    for port in ports:
-        result = scan_port(target, port)
+    with ThreadPoolExecutor(max_workers=100) as executor:
+        results = executor.map(lambda p: scan_port(target, p), ports)
+
+    for result in results:
         if result:
             open_ports.append(result)
 
