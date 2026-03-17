@@ -39,7 +39,7 @@ network-scanner/
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/your-username/network-scanner.git
+git clone https://github.com/navanil-das/network-scanner.git
 cd network-scanner
 pip install -r requirements.txt
 ```
