@@ -4,8 +4,8 @@ from src.utils import parse_ports
 
 def main():
     parser = argparse.ArgumentParser(description="Network Scanner")
-    parser.add_argument("--target", required=True, help="Target IP address")
-    parser.add_argument("--ports", default="1-1024", help="Port range (e.g. 1-1000)")
+    parser.add_argument("--target", required=True)
+    parser.add_argument("--ports", default="1-1024")
 
     args = parser.parse_args()
 
@@ -14,10 +14,13 @@ def main():
 
     print(f"\nScanning {target}...\n")
 
-    open_ports = scan_ports(target, ports)
+    results = scan_ports(target, ports)
 
-    for port in open_ports:
-        print(f"[OPEN] {port}")
+    for port, banner in results:
+        if banner:
+            print(f"[OPEN] {port} -> {banner}")
+        else:
+            print(f"[OPEN] {port} -> Unknown Service")
 
 
 if __name__ == "__main__":
