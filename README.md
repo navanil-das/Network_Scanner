@@ -1,4 +1,4 @@
-# 🔍 Python Network Scanner
+# 🔍 Network Scanner
 
 A multithreaded network scanner built in Python that detects open ports and identifies running services using banner grabbing. Designed as a lightweight, modular alternative to tools like Nmap.
 
