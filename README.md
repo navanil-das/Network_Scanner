@@ -34,9 +34,9 @@ network-scanner/
 └── .gitignore
 ```
 
-# 🏗️ Project Architecture
+## 🏗️ Project Architecture
 
-## Architecture Overview
+### Architecture Overview
 
 ```text
 +------------------+
@@ -79,32 +79,32 @@ network-scanner/
 +------------------+
 ```
 
-## Components
+### Components
 
-### 1. Command Line Interface (CLI)
+ 1. Command Line Interface (CLI)
 Acts as the entry point of the application. It accepts user inputs such as the target IP address, hostname, and port range to scan.
 
-### 2. Scanner Engine
+ 2. Scanner Engine
 The core component responsible for coordinating the scanning workflow. It validates inputs, manages scan execution, and collects results.
 
-### 3. Socket Module
+ 3. Socket Module
 Uses Python socket programming to establish TCP connections with target ports and determine whether they are open, closed, or filtered.
 
-### 4. Thread Pool
+ 4. Thread Pool
 Implements multithreading to scan multiple ports concurrently, significantly reducing overall scan time compared to sequential scanning.
 
-### 5. Target Network Layer
+ 5. Target Network Layer
 Represents the destination hosts and ports being scanned. The scanner interacts with this layer to perform connectivity checks.
 
-### 6. Result Processor
+ 6. Result Processor
 Aggregates scan results, filters relevant information, and prepares the output in a user-friendly format.
 
-### 7. Output Layer
+ 7. Output Layer
 Displays the final scan results, including open ports and associated services, through the console interface.
 
 ---
 
-# 🔄 Data Flow
+## 🔄 Data Flow
 
 ```text
 User Input
@@ -131,7 +131,7 @@ Result Aggregation
 Console Output
 ```
 ---
-## Workflow
+### Workflow
 
 1. The user provides the target host and port range.
 2. The CLI forwards the information to the Scanner Engine.
@@ -143,7 +143,7 @@ Console Output
 
 ---
 
-# ⚡ Design Highlights
+## ⚡ Design Highlights
 
 - Multithreaded architecture for faster scanning performance.
 - Modular design separating scanning logic, networking, and output handling.
