@@ -34,6 +34,123 @@ network-scanner/
 └── .gitignore
 ```
 
+# 🏗️ Project Architecture
+
+## Architecture Overview
+
+```text
++------------------+
+|      User        |
++--------+---------+
+         |
+         v
++------------------+
+| Command Line UI  |
++--------+---------+
+         |
+         v
++------------------+
+| Scanner Engine   |
+| (Main Logic)     |
++---+----------+---+
+    |          |
+    v          v
++-------+  +--------+
+| Socket|  | Thread |
+| Module|  | Pool   |
++---+---+  +---+----+
+    |          |
+    +-----+----+
+          |
+          v
++------------------+
+| Target Network   |
+| IPs & Ports      |
++--------+---------+
+         |
+         v
++------------------+
+| Result Processor |
++--------+---------+
+         |
+         v
++------------------+
+| Output / Report  |
++------------------+
+```
+
+## Components
+
+### 1. Command Line Interface (CLI)
+Acts as the entry point of the application. It accepts user inputs such as the target IP address, hostname, and port range to scan.
+
+### 2. Scanner Engine
+The core component responsible for coordinating the scanning workflow. It validates inputs, manages scan execution, and collects results.
+
+### 3. Socket Module
+Uses Python socket programming to establish TCP connections with target ports and determine whether they are open, closed, or filtered.
+
+### 4. Thread Pool
+Implements multithreading to scan multiple ports concurrently, significantly reducing overall scan time compared to sequential scanning.
+
+### 5. Target Network Layer
+Represents the destination hosts and ports being scanned. The scanner interacts with this layer to perform connectivity checks.
+
+### 6. Result Processor
+Aggregates scan results, filters relevant information, and prepares the output in a user-friendly format.
+
+### 7. Output Layer
+Displays the final scan results, including open ports and associated services, through the console interface.
+
+---
+
+# 🔄 Data Flow
+
+```text
+User Input
+    │
+    ▼
+Command Line Interface
+    │
+    ▼
+Scanner Engine
+    │
+    ▼
+Threaded Port Scanning
+    │
+    ▼
+Socket Connections
+    │
+    ▼
+Port Status Detection
+    │
+    ▼
+Result Aggregation
+    │
+    ▼
+Console Output
+```
+---
+## Workflow
+
+1. The user provides the target host and port range.
+2. The CLI forwards the information to the Scanner Engine.
+3. The Scanner Engine creates worker threads for concurrent scanning.
+4. Each thread uses sockets to attempt connections to target ports.
+5. The scanner determines whether each port is open or closed.
+6. Results from all threads are aggregated and processed.
+7. The final report is displayed to the user.
+
+---
+
+# ⚡ Design Highlights
+
+- Multithreaded architecture for faster scanning performance.
+- Modular design separating scanning logic, networking, and output handling.
+- Efficient socket-based port detection using Python networking libraries.
+- Scalable structure that can be extended with service detection, banner grabbing, OS fingerprinting, or vulnerability scanning modules.
+- Lightweight and easy to run without external dependencies.
+
 ---
 
 ## ⚙️ Installation
